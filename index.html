@@ -204,6 +204,52 @@ button.sk[aria-pressed="true"]::after{background:var(--cobalt-ink)}
 .toast.on{opacity:1}
 footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(--muted)}
 
+/* ---------- fiche établissement (photo + matières) ---------- */
+.school-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;align-items:center;margin-bottom:26px}
+.school-photo{margin:0;position:relative;border-radius:10px;overflow:hidden;background:var(--paper)}
+.school-photo img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.school-photo figcaption{position:absolute;left:10px;bottom:10px;font-size:12px;font-weight:600;color:#fff;background:rgba(10,14,24,.55);backdrop-filter:blur(4px);padding:3px 9px;border-radius:999px}
+.school-intro p{font-size:17px;line-height:1.55}
+.school-intro .total{font-size:14px;color:var(--muted);margin:0}
+.explain{margin:0 0 26px;padding:16px 18px;border-radius:10px;background:var(--cobalt-soft);font-size:15px;line-height:1.55}
+.explain b{display:block;margin-bottom:4px;font-size:15px}
+:root[lang="fr"] .en-only{display:none}
+.years{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.year h5{margin:0 0 4px;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.year .year-sub{font-size:13px;color:var(--muted);margin:0 0 12px}
+.subjects{list-style:none;margin:0;padding:0}
+.subjects li{display:grid;grid-template-columns:1fr 64px;gap:2px 14px;padding:11px 0;border-top:1px solid var(--line)}
+.subjects b{font-size:15px;font-weight:600}
+.subjects .d{grid-column:1;font-size:14px;color:var(--muted);line-height:1.45}
+.subjects .h{grid-column:2;grid-row:1/3;align-self:center;text-align:right;font:500 12px var(--mono);color:var(--muted)}
+.subjects .h i{display:block;height:5px;border-radius:3px;background:var(--line);margin-top:5px;position:relative;overflow:hidden}
+.subjects .h i::after{content:"";position:absolute;inset:0 auto 0 0;width:calc(var(--w) / 12 * 100%);background:var(--cobalt);border-radius:3px}
+.subjects li.core b{color:var(--ink)}
+.hours-note{font-size:13px;color:var(--muted);margin:16px 0 0}
+@media (max-width:760px){.school-top,.years{grid-template-columns:1fr}.years{gap:22px}}
+
+/* langue */
+.lang-btn{font:700 13px var(--sans);width:auto;padding:0 12px;border-radius:999px;gap:2px;display:inline-flex;align-items:center}
+.lang-btn span{opacity:.45}
+.lang-btn span.on{opacity:1}
+/* photo */
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start}
+.avatar{width:200px;height:200px;border-radius:50%;object-fit:cover;border:4px solid var(--surface);box-shadow:0 0 0 1px var(--line);margin-top:40px}
+@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.avatar{grid-row:1;width:112px;height:112px;margin:0 0 4px}}
+/* galerie stage */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:22px}
+.gallery:empty{display:none}
+.shot{margin:0}
+.shot button{all:unset;cursor:zoom-in;display:block;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+.shot button:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+.shot img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top left}
+.shot figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.lightbox{border:0;padding:0;background:transparent;max-width:min(1200px,94vw);max-height:92vh}
+.lightbox::backdrop{background:rgba(8,10,16,.82)}
+.lightbox img{display:block;max-width:100%;max-height:86vh;border-radius:10px}
+.lightbox p{color:#fff;margin:10px 0 0;font-size:15px}
+.lightbox .close{position:fixed;top:16px;right:16px;background:#fff;color:#111;border:0}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
@@ -222,11 +268,12 @@ footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(
       <a href="#competences">Compétences</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button class="icon-btn lang-btn" id="langBtn" type="button" aria-label="Switch to English"><span data-l="fr">FR</span>/<span data-l="en">EN</span></button>
     <button class="icon-btn" id="themeBtn" type="button" aria-label="Changer de thème">
       <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
-    <a class="btn btn-primary btn-small" href="CV_Paul_Millien.pdf" download>
+    <a class="btn btn-primary btn-small cv-link" href="CV_Paul_Millien.pdf" download>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>CV
     </a>
   </div>
@@ -234,17 +281,23 @@ footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(
 
 <main id="top">
   <div class="wrap hero">
+   <div class="hero-grid">
+   <div>
     <p class="status">Cherche un stage de fin d’études de 6 mois en Data &amp; IA, à partir de mars 2027</p>
     <h1>Paul<br>Millien</h1>
-    <p class="tokens" id="tokens" aria-label="Étudiant ingénieur en dernière année à l’ESILV, majeure Data et IA. Pendant mon stage chez Numih France, j’ai construit un benchmark pour évaluer des LLM open-source sur du français médical. Je cherche à continuer dans le NLP et l’évaluation de modèles, avec une embauche possible à la suite du stage."></p>
+    <p class="tokens" id="tokens"></p>
     <div class="token-bar">
       <span id="tokCount" aria-live="off">0 tokens</span>
       <button class="switch" id="tokSwitch" type="button" role="switch" aria-checked="true">
         <span class="switch-track"></span>Vue tokenizer
       </button>
     </div>
+   </div>
+   <!-- Photo : mets un fichier photo.jpg à côté de index.html. S'il n'existe pas, rien ne s'affiche. -->
+   <img class="avatar" src="photo.jpg" alt="Photo de Paul Millien" width="200" height="200" onerror="this.remove()">
+   </div>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="CV_Paul_Millien.pdf" download>
+      <a class="btn btn-primary cv-link" href="CV_Paul_Millien.pdf" download>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Télécharger mon CV (PDF)
       </a>
       <a class="btn" href="mailto:millien.paul@gmail.com">
@@ -313,8 +366,44 @@ footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(
             <span class="acc-plus" aria-hidden="true"><svg viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.8"><path d="M6 1v10M1 6h10"/></svg></span>
           </button>
           <div class="acc-panel" id="f3"><div><div class="acc-body">
-            <p>Deux ans de mathématiques, physique et sciences de l’ingénieur, en préparation aux concours des grandes écoles d’ingénieurs.</p>
-            <ul class="chips"><li class="chip">Mathématiques</li><li class="chip">Physique</li><li class="chip">Sciences de l’ingénieur</li></ul>
+            <div class="school-top">
+              <figure class="school-photo"><img src="arago.jpg" alt="Le lycée François Arago à Perpignan" loading="lazy" onerror="this.parentElement.remove()"><figcaption>Lycée François Arago, Perpignan</figcaption></figure>
+              <div class="school-intro">
+                <p>Une formation principalement axée sur les mathématiques et la physique, avec aussi du français, de l’anglais, des sciences de l’ingénieur et de l’informatique.</p>
+                <p class="total">Environ 32 h de cours par semaine, plus les colles (oraux hebdomadaires) et un devoir surveillé chaque semaine.</p>
+              </div>
+            </div>
+            <div class="explain en-only"><b>What is a “prépa”?</b>Classes préparatoires are a two-year, highly selective French program taken right after high school. Students follow an intensive curriculum in maths and physics, with weekly oral exams (“colles”) in front of a teacher, to prepare for the competitive entrance exams to the top engineering schools.</div>
+            <div class="years">
+              <div class="year">
+                <h5>1re année : MPSI</h5>
+                <p class="year-sub">Mathématiques, physique et sciences de l’ingénieur</p>
+                <ul class="subjects">
+                  <li><b>Mathématiques</b><span class="d">Analyse, algèbre linéaire et probabilités : le socle de tout le reste.</span><span class="h">12 h<i style="--w:12"></i></span></li>
+                  <li><b>Physique-chimie</b><span class="d">Mécanique, électricité, optique et thermodynamique, avec des TP.</span><span class="h">8 h<i style="--w:8"></i></span></li>
+                  <li><b>Sciences de l’ingénieur</b><span class="d">Modélisation et analyse de systèmes mécaniques et automatisés.</span><span class="h">2 h<i style="--w:2"></i></span></li>
+                  <li><b>Informatique</b><span class="d">Algorithmique et programmation en Python.</span><span class="h">2 h<i style="--w:2"></i></span></li>
+                  <li><b>Français-philosophie</b><span class="d">Lecture d’œuvres et dissertation autour d’un thème annuel.</span><span class="h">2 h<i style="--w:2"></i></span></li>
+                  <li><b>Anglais</b><span class="d">Synthèse de documents, expression écrite et orale.</span><span class="h">2 h<i style="--w:2"></i></span></li>
+                </ul>
+              </div>
+              <div class="year">
+                <h5>2e année : MP</h5>
+                <p class="year-sub">Mathématiques et physique</p>
+                <ul class="subjects">
+                  <li><b>Mathématiques</b><span class="d">Réduction des endomorphismes, séries, intégrales, probabilités approfondies.</span><span class="h">12 h<i style="--w:12"></i></span></li>
+                  <li><b>Physique-chimie</b><span class="d">Électromagnétisme, ondes, thermodynamique et introduction à la physique quantique.</span><span class="h">9 h<i style="--w:9"></i></span></li>
+                  <li><b>Sciences de l’ingénieur (option)</b><span class="d">Mon option de 2e année : automatique et étude des performances des systèmes.</span><span class="h">2 h<i style="--w:2"></i></span></li>
+                  <li><b>Informatique</b><span class="d">Bases de données et SQL, graphes, algorithmes.</span><span class="h">2 h<i style="--w:2"></i></span></li>
+                  <li><b>Français-philosophie</b><span class="d">Dissertation sur un nouveau thème annuel.</span><span class="h">2 h<i style="--w:2"></i></span></li>
+                  <li><b>Anglais</b><span class="d">Préparation aux épreuves écrites et orales des concours.</span><span class="h">2 h<i style="--w:2"></i></span></li>
+                  <li><b>TIPE</b><span class="d">Projet de recherche personnel présenté aux concours. Mon sujet : « Glisser plus vite grâce à la chaleur : peut-on augmenter la vitesse d’un ski en jouant sur la température ? »</span><span class="h">2 h<i style="--w:2"></i></span></li>
+                </ul>
+              </div>
+            </div>
+            <p class="hours-note">Heures par semaine, d’après les horaires nationaux des classes préparatoires.</p>
+          </div></div></div>
+        </li><li class="chip">Physique</li><li class="chip">Sciences de l’ingénieur</li></ul>
           </div></div></div>
         </li>
       </ol>
@@ -391,6 +480,14 @@ footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(
           </ul>
           <p>Le tout livré avec tests unitaires et documentation.</p>
           <ul class="chips"><li class="chip">NiceGUI</li><li class="chip">Python</li><li class="chip">Tests unitaires</li></ul>
+        </div>
+
+        <!-- Captures du stage : ajoute stage-1.png, stage-2.png, stage-3.png à côté de index.html.
+             Une capture absente est simplement masquée. Change les légendes ici. -->
+        <div class="gallery" id="gallery">
+          <figure class="shot"><button type="button"><img src="stage-1.png" alt="Classement des modèles" loading="lazy"></button><figcaption>Classement des modèles</figcaption></figure>
+          <figure class="shot"><button type="button"><img src="stage-2.png" alt="Comparaison tête-à-tête" loading="lazy"></button><figcaption>Comparaison tête-à-tête</figcaption></figure>
+          <figure class="shot"><button type="button"><img src="stage-3.png" alt="Analyse par spécialité" loading="lazy"></button><figcaption>Analyse par spécialité</figcaption></figure>
         </div>
       </article>
     </div>
@@ -546,7 +643,7 @@ footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(
         <span class="toast" id="toast" role="status">Adresse copiée</span>
       </div>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="CV_Paul_Millien.pdf" download>
+        <a class="btn btn-primary cv-link" href="CV_Paul_Millien.pdf" download>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Télécharger mon CV (PDF)
         </a>
         <a class="btn" href="https://www.linkedin.com/in/paul-millien-9b8548337" target="_blank" rel="noopener">LinkedIn</a>
@@ -556,68 +653,199 @@ footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(
   </section>
 </main>
 
+<dialog class="lightbox" id="lightbox">
+  <button class="icon-btn close" type="button" aria-label="Fermer">✕</button>
+  <img src="" alt=""><p></p>
+</dialog>
+
 <footer>
   <div class="wrap">Paul Millien, 2026. Page faite main, hébergée sur GitHub Pages.</div>
 </footer>
 
 <script>
+/* ======================= TRADUCTIONS =======================
+   Le site est écrit en français dans le HTML. Pour l'anglais,
+   chaque texte français est remplacé par sa version ci-dessous.
+   Si tu modifies un texte en français, modifie aussi la clé ici. */
+const EN = {
+"Parcours":"Education","Expérience":"Experience","Projets":"Projects","Compétences":"Skills",
+"Cherche un stage de fin d’études de 6 mois en Data & IA, à partir de mars 2027":"Looking for a 6-month end-of-studies internship in Data & AI, starting March 2027",
+"Vue tokenizer":"Tokenizer view",
+"Télécharger mon CV (PDF)":"Download my resume (PDF)","M’écrire":"Email me",
+"Cliquez sur une formation pour voir le détail":"Click a program to see the details",
+"ESILV, École Supérieure d’Ingénieurs Léonard-de-Vinci":"ESILV, Léonard-de-Vinci Graduate School of Engineering",
+"Diplôme d’ingénieur, majeure Data & IA. Paris-La Défense":"Master’s-level engineering degree, Data & AI major. Paris-La Défense",
+"Diplôme d’ingénieur (grade de Master), majeure Data & Intelligence Artificielle. Dernière année en cours.":"Engineering degree (Master’s level), majoring in Data & Artificial Intelligence. Currently in final year.",
+"Matières principales":"Main courses","Traitement automatique du langage (NLP)":"Natural Language Processing (NLP)",
+"Probabilités & statistiques":"Probability & statistics","Bases de données":"Databases",
+"Projets menés pendant le cursus":"Projects during the program",
+"Projet PI², assistant d’IA générative pour Leo Learning":"PI² project, generative AI assistant for Leo Learning",
+"Gomoku et son IA de jeu":"Gomoku and its game AI","e":"th",
+"sur plus de 250 équipes":"out of 250+ teams","Vie associative":"Student clubs",
+"Léo Survival (running et camping) et Léo Houblon (brassage de bière).":"Léo Survival (running and camping) and Léo Houblon (beer brewing).",
+"En cours":"Current","Sept. 2026 – Janv. 2027":"Sept. 2026 – Jan. 2027",
+"Semestre d’échange, 1er semestre de M2. Riga, Lettonie":"Exchange semester, first semester of the Master’s 2nd year. Riga, Latvia",
+"Semestre d’échange en Lettonie, avec tous les cours en anglais.":"Exchange semester in Latvia, with all courses taught in English.",
+"Matières":"Courses",
+": traitement de flux et de données massives avec Kafka et Spark":": stream and large-scale data processing with Kafka and Spark",
+"Technologie des bases de données volumineuses":"Technology of Large Databases",": Oracle SQL et PL/SQL":": Oracle SQL and PL/SQL",
+"Classe préparatoire MPSI / MP":"Classe préparatoire MPSI / MP (preparatory program)",
+"Deux ans de mathématiques, physique et sciences de l’ingénieur, en préparation aux concours des grandes écoles d’ingénieurs.":"Two intensive years of mathematics, physics and engineering science, preparing for the competitive entrance exams to French engineering schools.",
+"Mathématiques":"Mathematics","Physique":"Physics","Sciences de l’ingénieur":"Engineering science",
+"Parcourez le benchmark étape par étape":"Walk through the benchmark step by step",
+"Stage Concepteur Développeur (Data & IA)":"Software Developer Intern (Data & AI)",
+"Mai – Août 2026":"May – Aug. 2026",
+"Conception d’un benchmark qui mesure la qualité des LLM open-source quand on les interroge sur du français médical.":"Designed a benchmark that measures how well open-source LLMs handle questions in medical French.",
+"Construire le jeu de référence":"Build the reference set","Faire répondre les modèles":"Run the models",
+"Noter les réponses":"Score the answers","Restituer les résultats":"Present the results",
+"questions-réponses":"question-answer pairs","comptes rendus cliniques":"clinical reports","spécialités médicales":"medical specialties",
+"Un jeu de référence construit à partir de comptes rendus cliniques du corpus PARHAF, pour poser aux modèles des questions dont on connaît la bonne réponse.":"A reference set built from clinical reports in the PARHAF corpus, so the models are asked questions whose correct answer is known.",
+"LLM open-source comparés":"open-source LLMs compared","GPU chez Scaleway":"GPUs on Scaleway",
+"Inférence de tous les modèles avec vLLM sur GPU H100 (Scaleway), dans les mêmes conditions pour que la comparaison soit équitable.":"Inference for every model with vLLM on H100 GPUs (Scaleway), under identical conditions so the comparison is fair.",
+"Un moteur de scoring à trois niveaux, du plus mécanique au plus proche du jugement humain.":"A three-level scoring engine, from purely mechanical metrics to something close to human judgment.",
+"Métriques lexicales et sémantiques":"Lexical and semantic metrics",
+"La réponse ressemble-t-elle à la référence, dans les mots et dans le sens ?":"Does the answer match the reference, in wording and in meaning?",
+"Factualité médicale":"Medical factuality",
+"Les bonnes entités médicales sont-elles présentes ? Pipeline de reconnaissance d’entités alignée sur les terminologies de santé, enrichie d’un dictionnaire de près de 3 400 synonymes.":"Are the right medical entities present? A named-entity recognition pipeline aligned with healthcare terminologies, extended with a dictionary of about 3,400 synonyms.",
+"CIM-10":"ICD-10",
+"Un modèle Qwen, hébergé sur OVH/Scaleway, évalue chaque réponse comme le ferait un relecteur.":"A Qwen model hosted on OVH/Scaleway grades each answer the way a human reviewer would.",
+"Une application web NiceGUI pour exploiter les résultats sans toucher au code :":"A NiceGUI web app to explore the results without touching the code:",
+"classement général des modèles":"overall model leaderboard","comparaison tête-à-tête entre deux modèles":"head-to-head comparison of two models",
+"analyse par spécialité médicale":"breakdown by medical specialty","gestion des datasets et recalcul des scores":"dataset management and score recomputation",
+"Le tout livré avec tests unitaires et documentation.":"Delivered with unit tests and documentation.","Tests unitaires":"Unit tests",
+"Classement des modèles":"Model leaderboard","Comparaison tête-à-tête":"Head-to-head comparison","Analyse par spécialité":"Breakdown by specialty",
+"Cliquez sur un projet pour le détail":"Click a project for details",
+"LLM auto-hébergé accessible à distance":"Self-hosted LLM with remote access","2026, en cours":"2026, ongoing",
+"Un Qwen de 27 milliards de paramètres qui tourne sur mon PC, utilisable de n’importe où.":"A 27-billion-parameter Qwen model running on my own PC, usable from anywhere.",
+"Déploiement d’un modèle Qwen de 27 milliards de paramètres en local, sur une machine personnelle : RTX 4070 Ti, i9-14900KF, 64 Go de RAM":"Deployed a 27-billion-parameter Qwen model locally on a personal machine: RTX 4070 Ti, i9-14900KF, 64 GB RAM",
+"Accès distant sécurisé via Tailscale et SSH":"Secure remote access via Tailscale and SSH",
+"En cours : une interface web sécurisée pour utiliser le modèle depuis n’importe où":"In progress: a secure web interface to use the model from anywhere",
+"Technos":"Tech",
+"Projet PI², IA générative pour Leo Learning":"PI² project, generative AI for Leo Learning",
+"Un assistant de révision intégré à la plateforme pédagogique de l’ESILV. Note : 16/20.":"A study assistant built into ESILV’s learning platform. Grade: 16/20.",
+"Projet annuel en équipe : développement d’un assistant d’IA générative intégré à Leo Learning, la plateforme utilisée par tous les étudiants de l’ESILV":"Year-long team project: built a generative AI assistant integrated into Leo Learning, the learning platform used by every ESILV student",
+"Objectif : accompagner les étudiants dans leurs révisions en comprenant leurs besoins, en expliquant des notions et en proposant des ressources pertinentes":"Goal: help students revise by understanding their needs, explaining concepts and suggesting relevant resources",
+"Note obtenue : 16/20":"Grade: 16/20",
+"Gomoku, jeu et IA de jeu en Python":"Gomoku, game and game AI in Python",
+"sur plus de 250 équipes de la promotion.":"out of 250+ teams in my year.",
+"Reproduction complète du jeu de Gomoku":"Full implementation of the Gomoku game",
+"Conception d’une heuristique d’évaluation pour l’IA adverse":"Designed an evaluation heuristic for the AI opponent",
+"Classement : 8":"Ranking: 8","sur plus de 250 équipes de la promotion":"out of 250+ teams in my year",
+"IA de jeu":"Game AI","Heuristiques":"Heuristics",
+"Les compétences marquées d’un point sont cliquables":"Skills marked with a dot are clickable",
+"IA & NLP":"AI & NLP","Programmation":"Programming","Notions de C# et C++":"Basic C# and C++",
+"Applications & outils":"Apps & tools","Suite Adobe":"Adobe Suite","IA générative (Claude, ChatGPT)":"Generative AI (Claude, ChatGPT)",
+"Choisissez une compétence pour voir dans quel projet ou quel cours je l’ai utilisée.":"Pick a skill to see which project or course I used it in.",
+"En dehors des cours":"Outside of class","Natation, vélo, course":"Swim, bike, run",
+"Association ESILV de running et camping":"ESILV running and camping club","Association ESILV de brassage de bière":"ESILV beer brewing club",
+"Montage et optimisation de PC":"Building and tuning PCs","Jeux vidéo":"Video games",
+"Langues :":"Languages:","français (natif), anglais (B1+, TOEIC 665)":"French (native), English (B1+, TOEIC 665)",
+"Me contacter":"Get in touch",
+"Vous avez un stage en Data & IA à partir de mars 2027 ? Écrivez-moi, je réponds rapidement.":"Have a Data & AI internship starting March 2027? Send me an email, I reply quickly.",
+"Copier l’adresse":"Copy address","Adresse copiée":"Address copied",
+"Paul Millien, 2026. Page faite main, hébergée sur GitHub Pages.":"Paul Millien, 2026. Handmade page, hosted on GitHub Pages.",
+"Une formation principalement axée sur les mathématiques et la physique, avec aussi du français, de l’anglais, des sciences de l’ingénieur et de l’informatique.":"A program built mainly around mathematics and physics, along with French, English, engineering science and computer science.",
+"Environ 32 h de cours par semaine, plus les colles (oraux hebdomadaires) et un devoir surveillé chaque semaine.":"About 32 hours of class per week, plus weekly oral exams and a written exam every week.",
+"Lycée François Arago, Perpignan":"Lycée François Arago, Perpignan, France",
+"Le lycée François Arago à Perpignan":"Lycée François Arago in Perpignan",
+"1re année : MPSI":"Year 1: MPSI","2e année : MP":"Year 2: MP",
+"Mathématiques, physique et sciences de l’ingénieur":"Mathematics, physics and engineering science","Mathématiques et physique":"Mathematics and physics",
+"Physique-chimie":"Physics & chemistry","Informatique":"Computer science","Français-philosophie":"French & philosophy","Anglais":"English",
+"TIPE":"TIPE (research project)",
+"Analyse, algèbre linéaire et probabilités : le socle de tout le reste.":"Calculus, linear algebra and probability: the foundation for everything else.",
+"Mécanique, électricité, optique et thermodynamique, avec des TP.":"Mechanics, electricity, optics and thermodynamics, with lab work.",
+"Modélisation et analyse de systèmes mécaniques et automatisés.":"Modeling and analysis of mechanical and automated systems.",
+"Algorithmique et programmation en Python.":"Algorithms and programming in Python.",
+"Lecture d’œuvres et dissertation autour d’un thème annuel.":"Reading literary works and writing essays on a yearly theme.",
+"Synthèse de documents, expression écrite et orale.":"Document synthesis, written and spoken expression.",
+"Réduction des endomorphismes, séries, intégrales, probabilités approfondies.":"Matrix reduction, series, integrals, advanced probability.",
+"Électromagnétisme, ondes, thermodynamique et introduction à la physique quantique.":"Electromagnetism, waves, thermodynamics and an introduction to quantum physics.",
+"Sciences de l’ingénieur (option)":"Engineering science (my elective)",
+"Mon option de 2e année : automatique et étude des performances des systèmes.":"My second-year elective: control theory and system performance analysis.",
+"Projet de recherche personnel présenté aux concours. Mon sujet : « Glisser plus vite grâce à la chaleur : peut-on augmenter la vitesse d’un ski en jouant sur la température ? »":"Personal research project presented at the entrance exams. My topic: “Gliding faster with heat: can temperature be used to increase a ski’s speed?”",
+"Bases de données et SQL, graphes, algorithmes.":"Databases and SQL, graphs, algorithms.",
+"Dissertation sur un nouveau thème annuel.":"Essays on a new yearly theme.",
+"Préparation aux épreuves écrites et orales des concours.":"Preparation for the written and oral entrance exams.",
+"Projet de recherche personnel, présenté à l’oral des concours.":"Personal research project, presented orally at the entrance exams.",
+"Heures par semaine, d’après les horaires nationaux des classes préparatoires.":"Hours per week, based on the national prépa timetable.",
+"Photo de Paul Millien":"Photo of Paul Millien","Changer de thème":"Change theme","Fermer":"Close","Étapes du benchmark":"Benchmark steps"
+};
+
+const T = {
+  fr: {
+    pitch: "Étudiant ingénieur en dernière année à l’ESILV, majeure Data & IA. Pendant mon stage chez Numih France, j’ai construit un benchmark pour évaluer des LLM open-source sur du français médical. Je cherche à continuer dans le NLP et l’évaluation de modèles, avec une embauche possible à la suite du stage.",
+    title: "Paul Millien, Data & IA", cv: "CV_Paul_Millien.pdf", langBtn: "Switch to English",
+    pick: "Choisissez une compétence pour voir dans quel projet ou quel cours je l’ai utilisée.",
+    usedIn: "Où j’ai utilisé", copyFail: "Copie impossible, sélectionnez l’adresse à la main", copied: "Adresse copiée",
+    places: { stage:"Stage chez Numih France (benchmark LLM médical)", qwen:"Projet LLM auto-hébergé", pi2:"Projet PI², Leo Learning", gomoku:"Projet Gomoku", esilv:"Cours à l’ESILV", rtu:"Cours à Riga Technical University" }
+  },
+  en: {
+    pitch: "Final-year engineering student at ESILV, majoring in Data & AI. During my internship at Numih France, I built a benchmark to evaluate open-source LLMs on medical French. I want to keep working on NLP and model evaluation, ideally with a job offer after the internship.",
+    title: "Paul Millien, Data & AI", cv: "CV_Paul_Millien_EN.pdf", langBtn: "Passer en français",
+    pick: "Pick a skill to see which project or course I used it in.",
+    usedIn: "Where I used", copyFail: "Couldn’t copy, select the address by hand", copied: "Address copied",
+    places: { stage:"Internship at Numih France (medical LLM benchmark)", qwen:"Self-hosted LLM project", pi2:"PI² project, Leo Learning", gomoku:"Gomoku project", esilv:"Courses at ESILV", rtu:"Courses at Riga Technical University" }
+  }
+};
+
 (function(){
   const root = document.documentElement;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+                  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
 
   /* ---------- thème ---------- */
-  let saved = null;
-  try { saved = localStorage.getItem('theme'); } catch(e){}
-  if (saved) root.dataset.theme = saved;
+  const savedTheme = store.get('theme');
+  if (savedTheme) root.dataset.theme = savedTheme;
   else if (window.matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme = 'dark';
   document.getElementById('themeBtn').addEventListener('click', () => {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = next;
-    try { localStorage.setItem('theme', next); } catch(e){}
+    root.dataset.theme = next; store.set('theme', next);
   });
 
   /* ---------- texte d'accroche "généré" token par token ---------- */
   const el = document.getElementById('tokens');
   const count = document.getElementById('tokCount');
-  const text = el.getAttribute('aria-label').replace('Data et IA', 'Data & IA');
-  // découpe façon BPE : espace collé au mot, mots longs coupés en sous-mots
-  const pieces = [];
-  text.match(/\s?[A-Za-zÀ-ÿ’'-]+|\s?\d+|\s?[^\sA-Za-zÀ-ÿ\d]/g).forEach(w => {
-    const lead = w.startsWith(' ') ? ' ' : '';
-    let core = w.trim();
-    if (core.length <= 7) { pieces.push(lead + core); return; }
-    let first = true;
-    while (core.length > 0) {
-      const n = core.length <= 7 ? core.length : (core.length - 4 < 3 ? core.length - 3 : 4 + (core.length % 2));
-      pieces.push((first ? lead : '') + core.slice(0, n));
-      core = core.slice(n); first = false;
-    }
-  });
-  el.setAttribute('aria-hidden', 'false');
-  const frag = pieces.map((p, i) => {
-    const s = document.createElement('span');
-    s.className = 'tok'; s.textContent = p; s.title = 'token ' + (i + 1);
-    return s;
-  });
-  el.classList.add('show-tokens');
-  const caret = document.createElement('span'); caret.className = 'caret'; caret.setAttribute('aria-hidden','true');
-  if (reduce) {
-    frag.forEach(s => el.appendChild(s));
-    count.textContent = pieces.length + ' tokens';
-  } else {
+  let streamTimer = null;
+  function tokenize(text){
+    const pieces = [];
+    text.match(/\s?[A-Za-zÀ-ÿ’'-]+|\s?\d+|\s?[^\sA-Za-zÀ-ÿ\d]/g).forEach(w => {
+      const lead = w.startsWith(' ') ? ' ' : '';
+      let core = w.trim();
+      if (core.length <= 7) { pieces.push(lead + core); return; }
+      let first = true;
+      while (core.length > 0) {
+        const n = core.length <= 7 ? core.length : (core.length - 4 < 3 ? core.length - 3 : 4 + (core.length % 2));
+        pieces.push((first ? lead : '') + core.slice(0, n));
+        core = core.slice(n); first = false;
+      }
+    });
+    return pieces;
+  }
+  function stream(text, delay){
+    clearTimeout(streamTimer);
+    el.textContent = '';
+    el.setAttribute('aria-label', text);
+    const spans = tokenize(text).map((p, i) => {
+      const s = document.createElement('span');
+      s.className = 'tok'; s.textContent = p; s.title = 'token ' + (i + 1);
+      s.setAttribute('aria-hidden', 'true');
+      return s;
+    });
+    if (reduce) { spans.forEach(s => el.appendChild(s)); count.textContent = spans.length + ' tokens'; return; }
+    const caret = document.createElement('span'); caret.className = 'caret'; caret.setAttribute('aria-hidden','true');
     el.appendChild(caret);
     let i = 0;
     const step = () => {
-      if (i < frag.length) {
-        el.insertBefore(frag[i], caret);
-        i++; count.textContent = i + ' tokens';
-        setTimeout(step, 26 + Math.random() * 40);
-      } else {
-        setTimeout(() => caret.remove(), 1400);
-      }
+      if (i < spans.length) {
+        el.insertBefore(spans[i], caret); i++;
+        count.textContent = i + ' tokens';
+        streamTimer = setTimeout(step, 26 + Math.random() * 40);
+      } else { streamTimer = setTimeout(() => caret.remove(), 1400); }
     };
-    setTimeout(step, 450);
+    streamTimer = setTimeout(step, delay);
   }
+  el.classList.add('show-tokens');
   const sw = document.getElementById('tokSwitch');
   sw.addEventListener('click', () => {
     const on = sw.getAttribute('aria-checked') !== 'true';
@@ -625,13 +853,49 @@ footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(
     el.classList.toggle('show-tokens', on);
   });
 
-  /* ---------- sections dépliables ---------- */
-  document.querySelectorAll('.acc-btn').forEach(b => {
-    b.addEventListener('click', () => {
-      b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true');
+  /* ---------- langue ---------- */
+  const textNodes = [];
+  (function collect(){
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: n => n.parentElement.closest('script,#tokens,#used') ? 2 : 1 });
+    let n; while ((n = w.nextNode())) {
+      const key = n.nodeValue.replace(/\s+/g, ' ').trim();
+      if (EN[key] !== undefined) textNodes.push({ n, fr: n.nodeValue, en: n.nodeValue.replace(key, EN[key]) });
+    }
+  })();
+  const attrNodes = [];
+  document.querySelectorAll('[alt],[aria-label]').forEach(e => {
+    ['alt','aria-label'].forEach(a => {
+      const v = e.getAttribute(a);
+      if (v && EN[v] !== undefined) attrNodes.push({ e, a, fr: v, en: EN[v] });
     });
   });
-  // un lien interne vers un projet l'ouvre
+  let lang = 'fr';
+  function setLang(l, first){
+    lang = l;
+    root.lang = l;
+    textNodes.forEach(t => t.n.nodeValue = t[l]);
+    attrNodes.forEach(t => t.e.setAttribute(t.a, t[l]));
+    document.title = T[l].title;
+    document.querySelectorAll('.cv-link').forEach(a => a.setAttribute('href', T[l].cv));
+    document.querySelectorAll('#langBtn span').forEach(s => s.classList.toggle('on', s.dataset.l === l));
+    document.getElementById('langBtn').setAttribute('aria-label', T[l].langBtn);
+    resetUsed();
+    stream(T[l].pitch, first ? 450 : 120);
+  }
+  const param = new URLSearchParams(location.search).get('lang');
+  const initial = (param === 'en' || param === 'fr') ? param
+                : store.get('lang') || ((navigator.language || 'fr').toLowerCase().startsWith('fr') ? 'fr' : 'en');
+  document.getElementById('langBtn').addEventListener('click', () => {
+    const next = lang === 'fr' ? 'en' : 'fr';
+    store.set('lang', next); setLang(next);
+    const u = new URL(location.href); u.searchParams.set('lang', next); history.replaceState(null, '', u);
+  });
+
+  /* ---------- sections dépliables ---------- */
+  document.querySelectorAll('.acc-btn').forEach(b => {
+    b.addEventListener('click', () => b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true'));
+  });
   document.querySelectorAll('a[href^="#p-"]').forEach(a => {
     a.addEventListener('click', () => {
       const btn = document.querySelector(a.getAttribute('href') + ' .acc-btn');
@@ -641,14 +905,11 @@ footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(
 
   /* ---------- étapes du benchmark (onglets) ---------- */
   const tabs = [...document.querySelectorAll('.pipe-btn')];
-  const select = t => {
-    tabs.forEach(x => {
-      const on = x === t;
-      x.setAttribute('aria-selected', on);
-      x.tabIndex = on ? 0 : -1;
-      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
-    });
-  };
+  const select = t => tabs.forEach(x => {
+    const on = x === t;
+    x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1;
+    document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+  });
   tabs.forEach((t, i) => {
     t.addEventListener('click', () => select(t));
     t.addEventListener('keydown', e => {
@@ -660,36 +921,29 @@ footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(
   });
 
   /* ---------- compétences : où je les ai utilisées ---------- */
-  const places = {
-    stage:  { label: 'Stage chez Numih France (benchmark LLM médical)', href: '#experience' },
-    qwen:   { label: 'Projet LLM auto-hébergé', href: '#p-qwen' },
-    pi2:    { label: 'Projet PI², Leo Learning', href: '#p-pi2' },
-    gomoku: { label: 'Projet Gomoku', href: '#p-gomoku' },
-    esilv:  { label: 'Cours à l’ESILV', href: '#parcours' },
-    rtu:    { label: 'Cours à Riga Technical University', href: '#parcours' }
-  };
+  const hrefs = { stage:'#experience', qwen:'#p-qwen', pi2:'#p-pi2', gomoku:'#p-gomoku', esilv:'#parcours', rtu:'#parcours' };
   const used = document.getElementById('used');
   const skills = [...document.querySelectorAll('button.sk')];
+  function resetUsed(){
+    skills.forEach(x => x.setAttribute('aria-pressed', 'false'));
+    used.innerHTML = '<p></p>'; used.firstChild.textContent = T[lang].pick;
+  }
   skills.forEach(b => {
-    b.setAttribute('aria-pressed', 'false');
     b.addEventListener('click', () => {
       const wasOn = b.getAttribute('aria-pressed') === 'true';
-      skills.forEach(x => x.setAttribute('aria-pressed', 'false'));
-      if (wasOn) {
-        used.innerHTML = '<p>Choisissez une compétence pour voir dans quel projet ou quel cours je l’ai utilisée.</p>';
-        return;
-      }
+      resetUsed();
+      if (wasOn) return;
       b.setAttribute('aria-pressed', 'true');
-      const items = b.dataset.used.split(',').map(k => places[k]);
-      used.innerHTML = '<p>Où j’ai utilisé <strong></strong> :</p><ul></ul>';
+      used.innerHTML = '<p><span></span> <strong></strong> :</p><ul></ul>';
+      used.querySelector('span').textContent = T[lang].usedIn;
       used.querySelector('strong').textContent = b.textContent;
+      if (lang === 'en') used.querySelector('p').lastChild.nodeValue = ':';
       const ul = used.querySelector('ul');
-      items.forEach(p => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = p.href; a.textContent = p.label;
+      b.dataset.used.split(',').forEach(k => {
+        const li = document.createElement('li'), a = document.createElement('a');
+        a.href = hrefs[k]; a.textContent = T[lang].places[k];
         a.addEventListener('click', () => {
-          const btn = document.querySelector(p.href + ' .acc-btn');
+          const btn = document.querySelector(hrefs[k] + ' .acc-btn');
           if (btn) btn.setAttribute('aria-expanded', 'true');
         });
         li.appendChild(a); ul.appendChild(li);
@@ -697,18 +951,32 @@ footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(
     });
   });
 
+  /* ---------- captures du stage + agrandissement ---------- */
+  const gallery = document.getElementById('gallery');
+  const box = document.getElementById('lightbox');
+  gallery.querySelectorAll('.shot').forEach(fig => {
+    const img = fig.querySelector('img');
+    img.addEventListener('error', () => fig.remove());
+    if (img.complete && img.naturalWidth === 0) fig.remove();
+    fig.querySelector('button').addEventListener('click', () => {
+      box.querySelector('img').src = img.src;
+      box.querySelector('img').alt = img.alt;
+      box.querySelector('p').textContent = fig.querySelector('figcaption').textContent;
+      box.showModal();
+    });
+  });
+  box.addEventListener('click', e => { if (e.target === box || e.target.closest('.close')) box.close(); });
+
   /* ---------- copier l'email ---------- */
   const toast = document.getElementById('toast');
   document.getElementById('copyBtn').addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText('millien.paul@gmail.com');
-      toast.textContent = 'Adresse copiée';
-    } catch (e) {
-      toast.textContent = 'Copie impossible, sélectionnez l’adresse à la main';
-    }
+    try { await navigator.clipboard.writeText('millien.paul@gmail.com'); toast.textContent = T[lang].copied; }
+    catch (e) { toast.textContent = T[lang].copyFail; }
     toast.classList.add('on');
     setTimeout(() => toast.classList.remove('on'), 2200);
   });
+
+  setLang(initial, true);
 })();
 </script>
 </body>
